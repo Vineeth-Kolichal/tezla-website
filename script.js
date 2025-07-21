@@ -1,9 +1,9 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll(".nav-link");
 
     for (const link of navLinks) {
-        link.addEventListener("click", function(e) {
+        link.addEventListener("click", function (e) {
             e.preventDefault();
             const targetId = this.getAttribute("href");
             const targetElement = document.querySelector(targetId);
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         easing: 'easeOutQuad'
                     });
                 } else if (animationType === 'fade-in') {
-                     anime({
+                    anime({
                         targets: target,
                         translateY: [30, 0],
                         opacity: [0, 1],
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         easing: 'easeOutQuad'
                     });
                 } else if (animationType === 'stagger-icons') {
-                     anime({
+                    anime({
                         targets: target.querySelectorAll('.icon-box'),
                         scale: [0.5, 1],
                         opacity: [0, 1],
@@ -118,5 +118,34 @@ document.addEventListener("DOMContentLoaded", function() {
             duration: 800,
             easing: 'easeInOutQuad'
         });
+    });
+
+    // Contact Form Submission
+    const form = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzXsohj3MS3SSqB3Bzn8XZ4KolV841YyuU_CygUWhYZshj9vAHhPNZ7rlL-IuBzkAI6/exec'; // <-- PASTE YOUR URL HERE
+
+        formStatus.textContent = 'Sending...';
+
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    formStatus.textContent = 'Message sent successfully!';
+                    formStatus.style.color = 'green';
+                    form.reset();
+                } else {
+                    throw new Error(data.error || 'Unknown error');
+                }
+            })
+            .catch(error => {
+                formStatus.textContent = 'An error occurred. Please try again.';
+                formStatus.style.color = 'red';
+                console.error('Error!', error.message);
+            });
     });
 });
