@@ -7,7 +7,12 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
@@ -21,7 +26,7 @@ p {
 .navbar {
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
     padding: 15px 0;
     position: sticky;
     top: 0;
@@ -75,7 +80,7 @@ p {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 20px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero-section p {
@@ -84,7 +89,7 @@ p {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .hero-section .btn-primary {
@@ -95,14 +100,14 @@ p {
     padding: 15px 35px;
     border-radius: 50px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .hero-section .btn-primary:hover {
     background-color: #fff;
     color: #6a11cb;
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* Section Styling */
@@ -138,7 +143,7 @@ p {
 .card {
     border: none;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 30px;
     overflow: hidden;
@@ -146,11 +151,11 @@ p {
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .card-img-top {
-    height: 250px;
+    height: 350px;
     object-fit: contain;
     padding: 20px;
     background-color: #f8f9fa;
@@ -171,14 +176,14 @@ p {
     padding: 30px;
     border-radius: 10px;
     background-color: #fff;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     margin-bottom: 30px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .icon-box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .icon-box i {
@@ -221,7 +226,8 @@ p {
     color: #666;
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
     filter: invert(1) grayscale(100%) sepia(10%) saturate(5000%) hue-rotate(220deg);
 }
 
@@ -263,7 +269,7 @@ p {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Footer */
@@ -332,7 +338,9 @@ footer a:hover {
         font-size: 2.2rem;
     }
 
-    .products-section .col-md-6, .about-section .col-md-6, .contact-section .col-md-6 {
+    .products-section .col-md-6,
+    .about-section .col-md-6,
+    .contact-section .col-md-6 {
         margin-bottom: 30px;
     }
 }
