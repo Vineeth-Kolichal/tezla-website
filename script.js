@@ -10,33 +10,113 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (targetElement) {
                 window.scrollTo({
-                    top: targetElement.offsetTop,
+                    top: targetElement.offsetTop - 70, // Adjusted for fixed navbar
                     behavior: "smooth"
                 });
             }
         });
     }
 
-    // Intersection Observer for animations
-    const animatedSections = document.querySelectorAll('.section-padding, .hero-section');
+    // Hero Section Animation
+    anime({
+        targets: '.hero-section h1',
+        translateY: [20, 0],
+        opacity: [0, 1],
+        duration: 800,
+        delay: 300,
+        easing: 'easeOutQuad'
+    });
 
+    anime({
+        targets: '.hero-section p',
+        translateY: [20, 0],
+        opacity: [0, 1],
+        duration: 800,
+        delay: 500,
+        easing: 'easeOutQuad'
+    });
+
+    anime({
+        targets: '.hero-section .btn-primary',
+        scale: [0.8, 1],
+        opacity: [0, 1],
+        duration: 800,
+        delay: 700,
+        easing: 'easeOutElastic(1, .8)'
+    });
+
+
+    // Intersection Observer for scroll animations
     const observerOptions = {
-        root: null, // viewport
+        root: null,
         rootMargin: '0px',
-        threshold: 0.1 // 10% of the section must be visible
+        threshold: 0.2 // A little more of the element should be visible
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Stop observing once animated
+                const target = entry.target;
+                const animationType = target.dataset.animation;
+
+                if (animationType === 'stagger-cards') {
+                    anime({
+                        targets: target.querySelectorAll('.card'),
+                        translateY: [30, 0],
+                        opacity: [0, 1],
+                        delay: anime.stagger(200),
+                        easing: 'easeOutQuad'
+                    });
+                } else if (animationType === 'fade-in') {
+                     anime({
+                        targets: target,
+                        translateY: [30, 0],
+                        opacity: [0, 1],
+                        duration: 800,
+                        easing: 'easeOutQuad'
+                    });
+                } else if (animationType === 'stagger-icons') {
+                     anime({
+                        targets: target.querySelectorAll('.icon-box'),
+                        scale: [0.5, 1],
+                        opacity: [0, 1],
+                        delay: anime.stagger(150),
+                        easing: 'easeOutElastic(1, .8)'
+                    });
+                }
+
+                observer.unobserve(target);
             }
         });
     }, observerOptions);
 
-    animatedSections.forEach(section => {
-        section.classList.add('animated-section'); // Add initial animation class
-        observer.observe(section);
+    // Add data-attributes to sections that need animation
+    document.querySelector('#products .container').dataset.animation = 'stagger-cards';
+    document.querySelector('#why-choose-us .container').dataset.animation = 'stagger-icons';
+    document.querySelector('.about-section').dataset.animation = 'fade-in';
+    document.querySelector('.contact-section').dataset.animation = 'fade-in';
+
+    document.querySelectorAll('[data-animation]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Animate section titles
+    const sectionTitles = document.querySelectorAll('.section-padding h2');
+    sectionTitles.forEach(title => {
+        observer.observe(title);
+        title.dataset.animation = 'fade-in';
+    });
+
+    // Testimonial Carousel Animation
+    const testimonialCarousel = document.getElementById('testimonialCarousel');
+    testimonialCarousel.addEventListener('slide.bs.carousel', function (e) {
+        const activeItem = e.relatedTarget;
+        anime.set(activeItem.children, { opacity: 0 });
+        anime({
+            targets: activeItem.children,
+            opacity: [0, 1],
+            duration: 800,
+            easing: 'easeInOutQuad'
+        });
     });
 });
